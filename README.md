@@ -1,9 +1,3 @@
+# Lookahead Pathology in Monte Carlo Tree Search
 
-# Independent research in Computer Science
-**Author: Nguyen Phung Nhat Khoi**
-
-**Instructor: Raghuram Ramanujan**
-
-This repo contains the implementation of the game playing environment, including the game generator (in form of +1/-1 tree) and some search algorithms.
-
-Prerequisites: Python 3 installed in your machine.
+This code base accompanies the paper '_Lookahead Pathology in Monte Carlo Tree Search_', published in ICAPS 2024. Please read the README in each of the folder `real_games` and `synthetic_tree` for further details.
