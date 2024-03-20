@@ -12,6 +12,7 @@ click = "*"
 pandas = "*"
 matplotlib = "*"
 func-timeout = "*"
+scipy = "*"
 
 [requires]
 python_version = "3"

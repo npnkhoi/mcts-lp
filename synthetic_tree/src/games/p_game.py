@@ -8,18 +8,25 @@ from numpy import random
 import math
 from src.games.game import Game
 from src.games.constants import Side
+import scipy.optimize
 
 
 class PGame(Game):
     def __init__(self, depth: int=20, b: int=2, heuristic='mean-playout'):
-        # assert b == 2 # WARNING: applicable for b=2 only
         self.depth = depth
         self.branching_factor = b
         self.heuristic_name = heuristic
         # self.heuristic_object = Heuristic(name=heuristic, depth=depth, branching_factor=b_factor)
         self._state_to_node = {}
+
+        # set sample_constant to be the solution between 0 and 1 of the equation x^depth + x - 1 = 0
+        equation = lambda x, b: (1-x)**b - x
+
+        sample_constant = scipy.optimize.brentq(equation, 0, 1, args=(self.branching_factor)) # source: https://dl.acm.org/doi/abs/10.1145/3501714.3501723
+        print('sample_constant:', sample_constant)
+
+        # sample_constant = (math.sqrt(5) - 1) / 2 # taken from nau1982 paper
         
-        sample_constant = (3 - math.sqrt(5)) / 2 # taken from nau1982 paper
         num_nodes = (b ** (depth + 1) - 1) // (b - 1)
         num_leaves = b ** depth
         
