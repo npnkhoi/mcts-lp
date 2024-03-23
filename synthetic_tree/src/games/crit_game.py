@@ -64,6 +64,7 @@ class CritGame(Game):
         heuristic = self.heuristic_obj.get_eval(game=self, node_id=state)
       self._state_to_node[state]['heuristic'] = heuristic
     
+    assert 0 <= node['heuristic'] <= 1
     return self._get_node(state)['heuristic'] 
 
   def get_new_state(self, state: int, move: int):

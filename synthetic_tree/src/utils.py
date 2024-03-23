@@ -16,9 +16,9 @@ def save_data(data, filename: str) -> None:
         pickle.dump(data, file)
 
 
-def get_pgame(depth, b):
+def get_pgame(depth, b,  heuristic):
     while True:
-        game = PGame(depth=depth, b=b, heuristic='mean-playout')
+        game = PGame(depth=depth, b=b, heuristic=heuristic)
 
         flag = False
         for i in range(3, b+2):

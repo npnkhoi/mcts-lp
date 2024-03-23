@@ -9,6 +9,7 @@ class PerfectHeuristic(BaseHeuristic):
     """Return the true minimax value"""
     minimax = game._get_node(node_id)['minimax']
     heuristic = (minimax + 1) // 2
+    assert 0 <= heuristic <= 1
     return heuristic
 
 class ZeroHeuristic(BaseHeuristic): # Not tested

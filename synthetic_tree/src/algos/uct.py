@@ -46,8 +46,13 @@ class UCTPlayer(BaseAlgorithm):
 
         self.node_count = 1
         # Repeat the UCT iterations
-        for _ in range(self.num_iterations):
+        for iter in range(self.num_iterations):
             self._uct_recurse(self.root)
+
+            # Debugging
+            # if iter >= self.game.branching_factor:
+            #     move = self._select_move(node=self.root, bias_constant=0)
+            #     print(f"Iteration: {iter}, Move: {move}, Utility: {self.root.children[move].utility}")
 
         move = self._select_move(node=self.root, bias_constant=0)
         return {
