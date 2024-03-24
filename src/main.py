@@ -23,7 +23,7 @@ import subprocess
 import pandas
 import time
 import click
-from func_timeout import func_timeout, FunctionTimedOut
+# from func_timeout import func_timeout, FunctionTimedOut
 import json
 
 
@@ -60,11 +60,19 @@ def main(**kwargs):
     subprocess.run(['mkdir', '-p', log_path])
 
     algos = ALGOS[kwargs["algo_set"]]
-    df_result = pandas.DataFrame(columns=algos)
+    all_results = {
+        'args': kwargs,
+        'games': []
+    }
 
     # Execute games
     for game_id in range(kwargs["num_games"]):
         print(f'Game {game_id}/{kwargs["num_games"]}')
+        current_game_result = {
+            'id': game_id,
+            'move_utilities': [],
+            'players': []
+        }
         
         # INIT THE GAME: create the game, prepare variables#
         if kwargs["game_type"] == 'crit':
@@ -73,12 +81,14 @@ def main(**kwargs):
         else:
             assert kwargs["game_type"] == 'p'
             game = get_pgame(kwargs["game_depth"], kwargs["b_factor"], kwargs["heuristic"])
+        
+        for move in range(kwargs["b_factor"]):
+            state = game.get_new_state(1, move)
+            current_game_result['move_utilities'].append(game._get_node(state)['minimax'])
 
         # save game for reuse
         save_data(game, os.path.join(log_path, 'game'))
 
-        row_result = []
-        
         # RUN THE ALGORITHMS
         for algo in algos:
             print(f'Algo {algo}')
@@ -86,57 +96,47 @@ def main(**kwargs):
             """
             for alphabeta, algo is 'ab-<depth>'
             for uct, algo is 'uct-<bias_constant>-<num_iterations>'
-            for random, algo is 'rand'
             """
             algo_params = algo.split('-')
             name = algo_params[0]
             
-            """UNPACK THE ALGO CODE"""
-            if name == 'rand':
-                move = random.randint(0, kwargs["b_factor"])
-            else:
-                assert name in ['ab', 'uct', 'uct_minimax']
-                if name == 'ab':
-                    player = AlphaBetaPlayer(game, random_seed=None, max_depth=int(algo_params[1]))
-                elif name == 'uct':
-                    assert len(algo_params) == 3
-                    player = UCTPlayer(game, random_seed=None, num_iterations=int(algo_params[2]), \
-                        bias_constant=float(algo_params[1]))
-                else:
-                    assert name == 'uct_minimax'
-                    player = UCTMinimaxPlayer(game, random_seed=None, num_iterations=int(algo_params[2]), \
-                        bias_constant=float(algo_params[1]))
-                
-                try:
-                    # result = func_timeout(kwargs["timeout"], )
-                    # breakpoint()
-                    result = player.get_result()
-                    move = result['move']
-                except FunctionTimedOut:
-                    move = None
-                    print('Timeout!')
-            
-            """GET RESULT"""
-            if move is not None:
-                new_state = game.get_new_state(1, move)
-                is_optimal_move = int(game._get_node(new_state)['minimax'] == 1)
-                row_result.append(is_optimal_move)
-            else:
-                row_result.append(None)
+            # UNPACK THE ALGO CODE
+            assert name in ['uct_minimax']
 
-            """RECORD THE GAME STATE FOR REUSE"""
+            # TODO: update the code below to return list of decisions
+            
+            assert name in ['ab', 'uct', 'uct_minimax']
+            if name == 'ab':
+                raise NotImplementedError
+                player = AlphaBetaPlayer(game, random_seed=None, max_depth=int(algo_params[1]))
+            elif name == 'uct':
+                raise NotImplementedError
+                assert len(algo_params) == 3
+                player = UCTPlayer(game, random_seed=None, num_iterations=int(algo_params[2]), \
+                    bias_constant=float(algo_params[1]))
+            else:
+                assert name == 'uct_minimax'
+                player = UCTMinimaxPlayer(game, random_seed=None, num_iterations=int(algo_params[2]), \
+                    bias_constant=float(algo_params[1]))
+            
+            player.run()
+            current_game_result['players'].append({
+                'algo': algo,
+                'decisions': list(map(int, player.decisions)) # for JSON serialization
+            })
+
+            # RECORD THE GAME STATE FOR REUSE
             save_data(game, os.path.join(log_path, 'game'))
         
-        """SAVE TO DATAFRAMES"""
-        print(f'result: {row_result}')
-        df_result.loc[game_id] = row_result
+        # SAVE TO DATAFRAMES
+        all_results['games'].append(current_game_result)
 
 
-    """WRITE THE DATAFRAME TO CSV"""
-    df_result.to_csv(os.path.join(log_path, 'result.csv'))
+    # Save the results
+    # breakpoint()
+    with open(os.path.join(log_path, 'results.json'), 'w') as f:
+        json.dump(all_results, f, indent=2)
     os.system(f'rm {log_path}/game') # delete the game file
-
-    json.dump(kwargs, open(os.path.join(log_path, 'params.json'), 'w+'), indent=4)
     print('Done')
 
 if __name__ == '__main__':

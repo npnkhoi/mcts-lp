@@ -35,31 +35,26 @@ class UCTPlayer(BaseAlgorithm):
         self.bias_constant = bias_constant  # the constant c in UCB1 formula
         self.node_count = 0
         self.latest_expansion = None
+        self.decisions = []
         sys.setrecursionlimit(100005) # NOTICE: how much should this be?
 
-    def get_result(self):
+    def run(self) -> list[int]:
         """ 
-        This function proceeds the iteration for a number of times,
-        then returns the best move based on estimated utility.
-        This is the main function to communicate with the playing environment.
+        This function proceeds the iteration for a number of times.
+        Returns a list of moves after the iterations.
         """
 
         self.node_count = 1
+        self.decisions = []
         # Repeat the UCT iterations
         for iter in range(self.num_iterations):
             self._uct_recurse(self.root)
+            
+            # Get the best move from the root node
+            move = self._select_move(node=self.root, bias_constant=0)
+            self.decisions.append(move)
 
-            # Debugging
-            # if iter >= self.game.branching_factor:
-            #     move = self._select_move(node=self.root, bias_constant=0)
-            #     print(f"Iteration: {iter}, Move: {move}, Utility: {self.root.children[move].utility}")
-
-        move = self._select_move(node=self.root, bias_constant=0)
-        return {
-            "move": move,
-            "utility": self.root.children[move].utility,
-            "node_count": self.node_count
-        }
+        return self.decisions
 
     def _uct_recurse(self, node: UCTNode) -> int:
         """
