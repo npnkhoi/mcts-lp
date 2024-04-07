@@ -7,11 +7,13 @@ class Logger:
   def __init__(self, filepath):
     """Create a .txt file with the current timestamp"""
     self.file = open(filepath, 'w+')
+    self.filepath = filepath
 
   def print(self, info):
     print(info, file=self.file)
   
   def close(self):
+    print(f'Logged in {self.filepath}')
     self.file.close()
 
 def parse_eval(eval: dict) -> str:

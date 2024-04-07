@@ -45,7 +45,7 @@ class Stockfish:
         is_stockfish = False
         if path is None:
             filename = 'stockfish.exe' if platform == 'win32' else 'stockfish'
-            path = join('chess_game', 'src', 'stockfish', filename)
+            path = join('real_games', 'chess_game', 'src', 'stockfish', filename)
             is_stockfish = True
         
         self.engine = subprocess.Popen(

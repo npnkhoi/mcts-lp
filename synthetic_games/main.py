@@ -10,14 +10,14 @@ Command template
 
 from typing import List
 from numpy import random
-from src.algos.constants import ALGOS
-from src.heuristics.utils import HEURISTICS, create_heuristic
-from src.games.game import Game
-from src.utils import get_data, get_pgame, save_data
-from src.algos.uct import UCTPlayer
-from src.algos.uct_minimax import UCTMinimaxPlayer
-from src.algos.alphabeta import AlphaBetaPlayer
-from src.games.crit_game import CritGame
+from synthetic_games.algos.constants import ALGOS
+from synthetic_games.heuristics.utils import HEURISTICS, create_heuristic
+from synthetic_games.games.game import Game
+from synthetic_games.utils import get_data, get_pgame, save_data
+from synthetic_games.algos.uct import UCTPlayer
+from synthetic_games.algos.uct_minimax import UCTMinimaxPlayer
+from synthetic_games.algos.alphabeta import AlphaBetaPlayer
+from synthetic_games.games.crit_game import CritGame
 import os
 import subprocess
 import pandas
@@ -33,8 +33,8 @@ import json
 
 @click.option('--game-type', type=click.Choice(['crit', 'p']), default='crit', 
     help='crit means the CWL game, p means P-games, hard means the artificially constructed game to make UCT pathological')
-@click.option('--flip-rate', type=(float, float), default=(1, 1), 
-    help='Flip rate for the game. In the general case, we have two values for the two players.')
+@click.option('--flip-rate', type=float, default=1, 
+    help='Flip rate for the game.') # Can extend to two values for the two players
 @click.option('--b-factor', type=int, default=2,
     help='Branching factor for the game.')
 @click.option('--game-depth', type=int, default=10000,
@@ -76,7 +76,7 @@ def main(**kwargs):
         
         # INIT THE GAME: create the game, prepare variables#
         if kwargs["game_type"] == 'crit':
-            game:CritGame = CritGame(depth=kwargs["game_depth"], flip_rate=kwargs["flip_rate"], b_factor=kwargs["b_factor"])
+            game:CritGame = CritGame(depth=kwargs["game_depth"], flip_rate=(kwargs["flip_rate"], kwargs["flip_rate"]), b_factor=kwargs["b_factor"])
             game.set_heuristic(create_heuristic(kwargs["heuristic"], stdev=kwargs["stdev"]))
         else:
             assert kwargs["game_type"] == 'p'
@@ -133,7 +133,7 @@ def main(**kwargs):
     with open(os.path.join(log_path, 'results.json'), 'w') as f:
         json.dump(all_results, f, indent=2)
     os.system(f'rm {log_path}/game') # delete the game file
-    print('Done')
+    print(f'Done. Results saved in {log_path}')
 
 if __name__ == '__main__':
     tic = time.time()

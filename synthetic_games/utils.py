@@ -1,6 +1,6 @@
 import pickle
 
-from src.games.p_game import PGame
+from synthetic_games.games.p_game import PGame
 
 
 def get_data(filename: str) -> None:

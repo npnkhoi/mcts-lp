@@ -6,10 +6,10 @@ Implementation of Upper Confidence bounds applied to Trees (UCT)
 Author: Khoi Nguyen
 """
 from typing import Dict
-from src.games.constants import Side
-from src.games.game import Game
-from src.games.crit_game import CritGame
-from src.algos.base import BaseAlgorithm
+from synthetic_games.games.constants import Side
+from synthetic_games.games.game import Game
+from synthetic_games.games.crit_game import CritGame
+from synthetic_games.algos.base import BaseAlgorithm
 from dataclasses import dataclass
 from math import sqrt, log
 import sys

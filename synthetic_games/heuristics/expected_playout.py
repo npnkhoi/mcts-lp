@@ -1,5 +1,5 @@
-from src.games.game import Game
-from src.heuristics.base import BaseHeuristic
+from synthetic_games.games.game import Game
+from synthetic_games.heuristics.base import BaseHeuristic
 
 
 class ExpectedPlayoutHeuristic(BaseHeuristic):

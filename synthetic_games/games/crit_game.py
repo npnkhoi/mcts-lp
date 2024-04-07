@@ -6,10 +6,10 @@ Author: Khoi Nguyen
 
 from typing import Dict
 from numpy.random import RandomState
-from src.games.constants import Side
-from src.games.game import Game
-from src.games.constants import Side
-from src.heuristics.base import BaseHeuristic
+from synthetic_games.games.constants import Side
+from synthetic_games.games.game import Game
+from synthetic_games.games.constants import Side
+from synthetic_games.heuristics.base import BaseHeuristic
 
 class CritGame(Game):
   """ 

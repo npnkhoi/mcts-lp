@@ -3,10 +3,10 @@ Alphabeta search algorithm
 
 """
 
-from src.algos.base import BaseAlgorithm
-from src.games.constants import Side
-from src.games.game import Game
-from src.games.crit_game import CritGame
+from synthetic_games.algos.base import BaseAlgorithm
+from synthetic_games.games.constants import Side
+from synthetic_games.games.game import Game
+from synthetic_games.games.crit_game import CritGame
 
 
 class AlphaBetaPlayer(BaseAlgorithm):

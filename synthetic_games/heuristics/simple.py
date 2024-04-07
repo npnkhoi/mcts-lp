@@ -1,7 +1,7 @@
 import numpy as np
-from src.games.game import Game
-from src.heuristics.base import BaseHeuristic
-from src.heuristics.empirical import EmpiricalHeuristic
+from synthetic_games.games.game import Game
+from synthetic_games.heuristics.base import BaseHeuristic
+from synthetic_games.heuristics.empirical import EmpiricalHeuristic
 
 
 class PerfectHeuristic(BaseHeuristic):

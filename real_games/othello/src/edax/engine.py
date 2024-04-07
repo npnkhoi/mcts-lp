@@ -1,3 +1,4 @@
+import os
 import subprocess
 from typing import Dict, List
 from random import choice
@@ -7,7 +8,7 @@ class Engine():
     """Import the engine executable"""
     
     FILENAME = './lEdax-x64-custom'
-    DIR = 'othello/src/edax/'
+    DIR = os.path.join('real_games', 'othello', 'src', 'edax')
 
     self.engine = subprocess.Popen(
         FILENAME, universal_newlines=True, stdin=subprocess.PIPE, \

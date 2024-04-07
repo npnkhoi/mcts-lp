@@ -1,7 +1,7 @@
-from src.heuristics.base import BaseHeuristic
-from src.heuristics.empirical import EmpiricalHeuristic
-from src.heuristics.expected_playout import ExpectedPlayoutHeuristic
-from src.heuristics.simple import GaussianHeuristic, PerfectHeuristic, UniformHeuristic
+from synthetic_games.heuristics.base import BaseHeuristic
+from synthetic_games.heuristics.empirical import EmpiricalHeuristic
+from synthetic_games.heuristics.expected_playout import ExpectedPlayoutHeuristic
+from synthetic_games.heuristics.simple import GaussianHeuristic, PerfectHeuristic, UniformHeuristic
 
 EMPIRICAL_HEURISTICS = ['chess-rand-10', 'chess-pseu-10', 'othello-rand-10', 'othello-pseu-10']
 SIMPLE_HEURISTICS = ['gaussian', 'zero', 'perfect']

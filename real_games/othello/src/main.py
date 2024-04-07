@@ -9,9 +9,9 @@
 import subprocess
 import click
 from os.path import join
-from othello.src.assess import assess_criticality, assess_noise
-from utils import Logger
-from othello.src.edax import Engine
+from real_games.othello.src.assess import assess_criticality, assess_noise
+from real_games.utils import Logger
+from real_games.othello.src.edax import Engine
 import time
 
 def init_logger(batch_id, job_id, objective, n_positions, position_depth, \

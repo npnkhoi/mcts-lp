@@ -6,9 +6,9 @@ Author: Khoi Nguyen
 """
 
 from numpy.random import RandomState
-from src.games.crit_game import CritGame
+from synthetic_games.games.crit_game import CritGame
 
-from src.games.game import Game
+from synthetic_games.games.game import Game
 
 
 class BaseAlgorithm:

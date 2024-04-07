@@ -9,16 +9,16 @@
 import subprocess
 import click
 from os.path import join
-from chess_game.src.assess import assess_criticality, assess_flipping_corelation, assess_noise
-from utils import Logger
-from chess_game.src.stockfish import Engine
+from real_games.chess_game.src.assess import assess_criticality, assess_flipping_corelation, assess_noise
+from real_games.utils import Logger
+from real_games.chess_game.src.stockfish import Engine
 import time
 
 OBJECTIVES = ['criticality', 'noise']
 
 
 def init_logger(batch_id, job_id, objective, n_positions, position_depth, \
-  search_depth, n_top_moves):
+  search_depth, n_top_moves) -> Logger:
   
   base_path = join('logs', batch_id) 
   subprocess.run(['mkdir', '-p', base_path])

@@ -6,8 +6,8 @@ FIXME: dont use Heuristic!
 from typing import Dict
 from numpy import random
 import math
-from src.games.game import Game
-from src.games.constants import Side
+from synthetic_games.games.game import Game
+from synthetic_games.games.constants import Side
 import scipy.optimize
 
 

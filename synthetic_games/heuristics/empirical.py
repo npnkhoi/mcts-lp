@@ -1,11 +1,11 @@
 import pickle
 import numpy as np
-from src.heuristics.base import BaseHeuristic
+from synthetic_games.heuristics.base import BaseHeuristic
 
 
 class EmpiricalHeuristic(BaseHeuristic):
   def __init__(self, hist_name: str):
-    with open('src/heuristics/heuristic_data/'+hist_name+'.pkl', 'rb') as f:
+    with open('synthetic_games/heuristics/heuristic_data/'+hist_name+'.pkl', 'rb') as f:
       self.hist = pickle.load(f)
     self.min_heuristic = min(min(self.hist[0]), min(self.hist[1]))
     self.max_heuristic = max(max(self.hist[0]), max(self.hist[1]))

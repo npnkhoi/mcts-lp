@@ -3,8 +3,8 @@ Assessment functions for Chess positions
 """
 
 from typing import Dict
-from chess_game.src.stockfish import Engine
-from utils import parse_eval
+from real_games.chess_game.src.stockfish import Engine
+from real_games.utils import parse_eval
 
 def assess_criticality(engine: Engine, logger, position: Dict, search_depth):
   """

@@ -1,5 +1,5 @@
-from src.algos.uct import UCTPlayer, UCTNode
-from src.games.constants import Side
+from synthetic_games.algos.uct import UCTPlayer, UCTNode
+from synthetic_games.games.constants import Side
 
 
 class UCTMinimaxPlayer(UCTPlayer):

@@ -12,7 +12,7 @@ This file implements Engine, an extension of Stockfish to fit our use.
 """
 
 from typing import Dict, Optional
-from chess_game.src.stockfish.stockfish import Stockfish
+from real_games.chess_game.src.stockfish.stockfish import Stockfish
 from random import choice
 
 class Engine(Stockfish):

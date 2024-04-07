@@ -3,8 +3,8 @@ Assessment functions for Chess positions
 """
 
 from typing import Dict
-from othello.src.edax import Engine
-from utils import Logger, parse_eval
+from real_games.othello.src.edax import Engine
+from real_games.utils import Logger, parse_eval
 
 def assess_criticality(engine: Engine, logger: Logger, position: Dict, search_depth):
   """
