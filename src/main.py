@@ -101,16 +101,12 @@ def main(**kwargs):
             name = algo_params[0]
             
             # UNPACK THE ALGO CODE
-            assert name in ['uct_minimax']
-
-            # TODO: update the code below to return list of decisions
             
             assert name in ['ab', 'uct', 'uct_minimax']
             if name == 'ab':
                 raise NotImplementedError
                 player = AlphaBetaPlayer(game, random_seed=None, max_depth=int(algo_params[1]))
             elif name == 'uct':
-                raise NotImplementedError
                 assert len(algo_params) == 3
                 player = UCTPlayer(game, random_seed=None, num_iterations=int(algo_params[2]), \
                     bias_constant=float(algo_params[1]))
