@@ -1,6 +1,6 @@
 # Lookahead Pathology in Monte Carlo Tree Search
 
-This code base accompanies the paper '_Lookahead Pathology in Monte Carlo Tree Search_', published in ICAPS 2024.
+This code base accompanies the paper ['_Lookahead Pathology in Monte Carlo Tree Search_'](https://ojs.aaai.org/index.php/ICAPS/article/view/31501), published in ICAPS 2024. A [longer ArXiV version](https://arxiv.org/abs/2212.05208) includes extended experimental and theoretical results.
 
 ## Install
 
@@ -127,14 +127,18 @@ python -m real_games.othello.src.main criticality othello criticality \
 
 ## Cite
 
-If you find the code or results useful for your research, cite our work as follows:
+If you find the code or results useful for your research, please cite our work as follows:
 ```
-@misc{nguyen2022lookahead,
-      title={Lookahead Pathology in Monte-Carlo Tree Search}, 
-      author={Khoi P. N. Nguyen and Raghuram Ramanujan},
-      year={2022},
-      eprint={2212.05208},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI}
+@article{Nguyen_Ramanujan_2024, 
+  title={Lookahead Pathology in Monte-Carlo Tree Search}, 
+  volume={34}, 
+  url={https://ojs.aaai.org/index.php/ICAPS/article/view/31501}, 
+  DOI={10.1609/icaps.v34i1.31501}, 
+  number={1}, 
+  journal={Proceedings of the International Conference on Automated Planning and Scheduling}, 
+  author={Nguyen, Khoi P. N. and Ramanujan, Raghuram}, 
+  year={2024}, 
+  month={May}, 
+  pages={414-422}
 }
 ```
