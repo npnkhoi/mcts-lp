@@ -1,6 +1,6 @@
 # Lookahead Pathology in Monte Carlo Tree Search
 
-This code base accompanies the paper [Lookahead Pathology in Monte Carlo Tree Search](https://ojs.aaai.org/index.php/ICAPS/article/view/31501), published in ICAPS 2024. A [longer ArXiV version](https://arxiv.org/abs/2212.05208) includes extended experimental and theoretical results.
+This code base accompanies the paper [Lookahead Pathology in Monte-Carlo Tree Search](https://ojs.aaai.org/index.php/ICAPS/article/view/31501), published in ICAPS 2024. A [longer ArXiV version](https://arxiv.org/abs/2212.05208) includes extended experimental and theoretical results.
 
 ## Install
 
